@@ -1,7 +1,7 @@
 import React from 'react';
 import { TrendingUp, TrendingDown, Minus, AlertCircle, CheckCircle2, Clock, ArrowRight } from 'lucide-react';
 import {
-  AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
+  AreaChart, Area, Tooltip, ResponsiveContainer,
 } from 'recharts';
 import { useApp } from '../../context/AppContext';
 import {
