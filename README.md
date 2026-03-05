@@ -2,6 +2,8 @@
 
 A lightweight web application built with React + TypeScript that helps individuals and small teams manage the core operational elements of a business in one place.
 
+See it live here -> https://business-ops-toolkit.vercel.app/
+
 ## Features
 
 ### 📊 KPI Tracker
