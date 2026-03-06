@@ -166,6 +166,7 @@ button { cursor: pointer; font-family: var(--font-body); }
   justify-content: center;
   padding: 1.5rem;
   animation: fadeIn 0.15s ease;
+  pointer-events: all;
 }
 .modal {
   background: #1e2125;
