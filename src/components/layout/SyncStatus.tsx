@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Cloud, CloudOff, RefreshCw, AlertCircle, CheckCircle2, LogOut, User, Shield } from 'lucide-react';
+import { CloudOff, RefreshCw, AlertCircle, CheckCircle2, LogOut, User, Shield } from 'lucide-react';
 import { useApp, type SyncStatus } from '../../context/AppContext';
 import { useAuth } from '../../context/AuthContext';
 import AuthModal from '../auth/AuthModal';
