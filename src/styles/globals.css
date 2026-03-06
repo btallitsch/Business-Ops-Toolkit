@@ -157,9 +157,7 @@ button { cursor: pointer; font-family: var(--font-body); }
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.75);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: rgba(0, 0, 0, 0.85);
   z-index: 300;
   display: flex;
   align-items: center;
@@ -169,16 +167,18 @@ button { cursor: pointer; font-family: var(--font-body); }
   pointer-events: all;
 }
 .modal {
-  background: #1e2125;
-  border: 1px solid #3a3e45;
+  background: #22262b;
+  border: 1px solid #404650;
   border-radius: var(--radius-lg);
   padding: 1.75rem;
   width: 100%;
   max-width: 640px;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.7), 0 2px 8px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 16px 60px rgba(0, 0, 0, 0.9);
   animation: slideUp 0.2s ease;
+  position: relative;
+  z-index: 301;
 }
 .modal-wide { max-width: 800px; }
 .modal-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.5rem; gap: 1rem; }
