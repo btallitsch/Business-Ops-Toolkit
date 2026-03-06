@@ -93,25 +93,28 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     if (!user) return;
     const uid = user.uid;
     setSyncStatus('loading');
-    let initialised = false;
-
-    const bootstrap = async () => {
-      const hasData = await userHasData(db, uid);
-      if (!hasData) await bootstrapUserData(db, uid, seedKPIs, seedDecisions, seedFollowUps);
-      initialised = true;
-    };
-    bootstrap().catch((err) => markError(err.message));
-
+  
     const onError = (err: Error) => {
       if (err.message.toLowerCase().includes('offline') || err.message.toLowerCase().includes('network')) {
         setSyncStatus('offline');
-      } else { markError(err.message); }
+      } else {
+        markError(err.message);
+      }
     };
-
-    const unsubKPIs      = subscribeKPIs(db, uid, (data) => { setKPIs(data); if (initialised) setSyncStatus((s) => s === 'syncing' ? s : 'synced'); }, onError);
-    const unsubDecisions = subscribeDecisions(db, uid, (data) => { setDecisions(data); if (initialised) setSyncStatus((s) => s === 'syncing' ? s : 'synced'); }, onError);
-    const unsubFollowUps = subscribeFollowUps(db, uid, (data) => { setFollowUps(data); if (initialised) setSyncStatus((s) => s === 'syncing' ? s : 'synced'); }, onError);
-
+  
+    // Set up real-time listeners immediately
+    const unsubKPIs      = subscribeKPIs(db, uid, (data) => { setKPIs(data); }, onError);
+    const unsubDecisions = subscribeDecisions(db, uid, (data) => { setDecisions(data); }, onError);
+    const unsubFollowUps = subscribeFollowUps(db, uid, (data) => { setFollowUps(data); }, onError);
+  
+    // Bootstrap seed data for new users, then mark synced
+    const bootstrap = async () => {
+      const hasData = await userHasData(db, uid);
+      if (!hasData) await bootstrapUserData(db, uid, seedKPIs, seedDecisions, seedFollowUps);
+      setSyncStatus('synced');
+    };
+    bootstrap().catch((err) => markError(err.message));
+  
     return () => { unsubKPIs(); unsubDecisions(); unsubFollowUps(); };
   }, [user]);
 
