@@ -2,8 +2,6 @@
 
 A lightweight web application built with React + TypeScript that helps individuals and small teams manage the core operational elements of a business in one place.
 
-See it live here -> https://business-ops-toolkit.vercel.app/
-
 ## Features
 
 ### 📊 KPI Tracker
@@ -107,3 +105,87 @@ All data is stored in `localStorage` under the keys `bot:kpis`, `bot:decisions`,
 ## License
 
 MIT
+
+---
+
+## Firebase Setup (Cloud Sync)
+
+This version adds Firebase Firestore cloud sync and authentication. Follow these steps to connect your Firebase project:
+
+### 1. Create a Firebase Project
+
+1. Go to [console.firebase.google.com](https://console.firebase.google.com)
+2. Click **Add project**, give it a name, and complete the setup wizard
+3. From the project overview, click the **Web** icon (`</>`) to add a web app
+4. Copy the `firebaseConfig` values shown — you'll need them in step 3
+
+### 2. Enable Firestore and Authentication
+
+**Firestore Database:**
+1. In the left sidebar, go to **Build → Firestore Database**
+2. Click **Create database**, choose **Start in production mode**, pick a region
+3. After creation, go to the **Rules** tab and paste:
+```
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId}/{document=**} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+  }
+}
+```
+4. Click **Publish**
+
+**Authentication:**
+1. In the left sidebar, go to **Build → Authentication**
+2. Click **Get started**
+3. Enable **Anonymous** sign-in (for first-time users)
+4. Enable **Email/Password** sign-in (for account creation and cross-device access)
+
+### 3. Configure Environment Variables
+
+Copy `.env.example` to `.env.local` and fill in your Firebase config:
+
+```bash
+cp .env.example .env.local
+```
+
+Edit `.env.local`:
+```
+VITE_FIREBASE_API_KEY=AIzaSy...
+VITE_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID=your-project-id
+VITE_FIREBASE_STORAGE_BUCKET=your-project.appspot.com
+VITE_FIREBASE_MESSAGING_SENDER_ID=123456789
+VITE_FIREBASE_APP_ID=1:123456789:web:abc123
+```
+
+### 4. Run the App
+
+```bash
+npm install
+npm run dev
+```
+
+### How Sync Works
+
+- **Anonymous auth**: On first load, users are automatically signed in anonymously — no friction, immediate access
+- **Optimistic updates**: UI updates instantly; writes to Firestore happen in the background
+- **Real-time sync**: Firestore `onSnapshot` listeners mean changes appear instantly across tabs/devices
+- **Offline support**: IndexedDB persistence means the app works offline; writes queue and sync when reconnected
+- **Account upgrade**: Users can convert their anonymous session to a full email account (same UID = same data) via the account button in the sidebar
+- **Sync status indicator**: Bottom of the sidebar shows live sync state: Loading / Saving / Synced / Offline / Error
+
+### Data Structure in Firestore
+
+```
+users/
+  {uid}/
+    kpis/
+      {kpiId} → KPI document
+    decisions/
+      {decisionId} → Decision document
+    followups/
+      {followUpId} → FollowUp document
+```

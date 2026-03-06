@@ -3,6 +3,7 @@ import { LayoutDashboard, TrendingUp, BookOpen, Bell, ChevronRight } from 'lucid
 import type { ActiveView } from '../../types';
 import { useApp } from '../../context/AppContext';
 import { getFollowUpSummary, isOverdue } from '../../utils/helpers';
+import SyncStatusBar from './SyncStatus';
 import './Sidebar.css';
 
 interface SidebarProps {
@@ -69,6 +70,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeView, onViewChange }) => {
           </div>
         </div>
       </div>
+      <SyncStatusBar />
     </aside>
   );
 };

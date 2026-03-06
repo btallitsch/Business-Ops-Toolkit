@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ChevronDown, ChevronUp, Edit2, Trash2, PlusCircle, Mail, Phone, Video, MessageSquare, X, Check } from 'lucide-react';
 import type { FollowUp, FollowUpChannel } from '../../types';
 import { useApp } from '../../context/AppContext';
-import { formatDateTime, getDueDateLabel, isOverdue, statusColors } from '../../utils/helpers';
+import { formatDate, formatDateTime, getDueDateLabel, isOverdue, statusColors } from '../../utils/helpers';
 
 interface FollowUpCardProps {
   followUp: FollowUp;

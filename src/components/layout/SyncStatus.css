@@ -1,0 +1,181 @@
+.sync-status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid var(--border);
+  gap: 0.5rem;
+}
+
+/* Sync pill */
+.sync-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  padding: 0.25rem 0.55rem;
+  border-radius: 100px;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+
+.sync-loading, .sync-syncing {
+  color: var(--text-3);
+  border-color: var(--border);
+}
+
+.sync-synced {
+  color: var(--green);
+  background: rgba(74, 222, 128, 0.06);
+  border-color: rgba(74, 222, 128, 0.2);
+}
+
+.sync-offline {
+  color: var(--orange);
+  background: rgba(251, 146, 60, 0.06);
+  border-color: rgba(251, 146, 60, 0.2);
+}
+
+.sync-error {
+  color: var(--red);
+  background: rgba(248, 113, 113, 0.06);
+  border-color: rgba(248, 113, 113, 0.2);
+}
+
+/* Spin animation */
+.spin {
+  animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Account button */
+.account-wrap {
+  position: relative;
+}
+
+.account-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  border: 1px solid var(--border-2);
+  background: var(--bg-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.account-btn.anonymous {
+  color: var(--text-3);
+}
+
+.account-btn.authenticated {
+  color: var(--amber-lt);
+  border-color: rgba(217, 119, 6, 0.4);
+  background: rgba(217, 119, 6, 0.08);
+}
+
+.account-btn:hover {
+  border-color: var(--amber);
+  color: var(--amber-lt);
+}
+
+/* Account menu */
+.account-menu {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  right: 0;
+  background: var(--bg-3);
+  border: 1px solid var(--border-2);
+  border-radius: var(--radius-lg);
+  width: 220px;
+  box-shadow: var(--shadow-lg);
+  z-index: 200;
+  overflow: hidden;
+  animation: slideUp 0.15s ease;
+}
+
+.account-menu-header {
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.account-menu-name {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account-menu-uid {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-3);
+}
+
+.account-menu-warn {
+  font-size: 0.72rem;
+  color: var(--orange);
+  margin-top: 0.2rem;
+}
+
+.account-menu-divider {
+  height: 1px;
+  background: var(--border);
+}
+
+.account-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.55rem 1rem;
+  background: none;
+  border: none;
+  color: var(--text-2);
+  font-size: 0.82rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.account-menu-item:hover {
+  background: var(--bg-4);
+  color: var(--text);
+}
+
+.account-menu-item.primary {
+  color: var(--amber-lt);
+}
+
+.account-menu-item.primary:hover {
+  background: rgba(217, 119, 6, 0.1);
+}
+
+.account-menu-item.danger {
+  color: var(--red);
+}
+
+.account-menu-item.danger:hover {
+  background: rgba(248, 113, 113, 0.08);
+}
+
+.account-menu-note {
+  padding: 0.5rem 1rem 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 0.63rem;
+  color: var(--text-3);
+  line-height: 1.4;
+  border-top: 1px solid var(--border);
+}
