@@ -60,7 +60,7 @@ const SyncStatusBar: React.FC = () => {
             <>
               {/* Click-outside backdrop */}
               <div
-                style={{ position: 'fixed', inset: 0, zIndex: 199 }}
+                style={{ position: 'fixed', inset: 0, zIndex: 50 }}
                 onClick={() => setShowMenu(false)}
               />
               <div className="account-menu">
